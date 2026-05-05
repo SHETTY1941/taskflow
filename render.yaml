@@ -18,9 +18,10 @@ services:
       - key: CLERK_PUBLISHABLE_KEY
         sync: false
 
-  # ── Frontend ─────────────────────────────────────────
-  - type: static
+  # ── Frontend ──────────────────────────────────────────
+  - type: web
     name: taskflow-app
+    runtime: static
     rootDir: .
     buildCommand: npm install -g pnpm && pnpm install --frozen-lockfile && pnpm --filter @workspace/taskflow build
     staticPublishPath: artifacts/taskflow/dist/public
