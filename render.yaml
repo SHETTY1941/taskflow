@@ -12,27 +12,22 @@ services:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URI
-        sync: false        # You'll paste this in Render dashboard
+        sync: false
       - key: CLERK_SECRET_KEY
         sync: false
       - key: CLERK_PUBLISHABLE_KEY
         sync: false
 
   # ── Frontend ─────────────────────────────────────────
-  - type: web
+  - type: static
     name: taskflow-app
-    runtime: static
-    region: oregon
-    plan: free
     rootDir: .
     buildCommand: npm install -g pnpm && pnpm install --frozen-lockfile && pnpm --filter @workspace/taskflow build
     staticPublishPath: artifacts/taskflow/dist/public
     envVars:
       - key: BASE_PATH
         value: /
-      - key: PORT
-        value: 3000
       - key: VITE_CLERK_PUBLISHABLE_KEY
         sync: false
       - key: VITE_API_URL
-        sync: false        # Your backend URL from Render
+        sync: false
